@@ -22,17 +22,29 @@ private:
 public:
     
     vector<vector<int>> subsetsWithDup(vector<int>& nums) {
-        
+        // sort(nums.begin(), nums.end());
+        // set<vector<int> > r;
+        // vector<int> temp;
+        // sub(0, nums.size(), nums, r, temp);
+
+        // vector<vector<int>> ans(r.begin(), r.end());
+        // return ans;
+
         sort(nums.begin(), nums.end());
 
-        set<vector<int>> r;
-        vector<int> temp;
+        set<vector<int>> s;
+        int n = nums.size();
+        int total = 1 << n;
 
-        sub(0, nums.size(), nums, r, temp);
-
-        vector<vector<int>> ans(r.begin(), r.end());
-
-        return ans;
+        for( int i=0; i< total; i++){
+            vector<int> t;
+            for(int j=0; j<n; j++){
+                if( i & (1 << j)) t.push_back(nums[j]);
+            }
+            s.insert(t);
+        }
+        vector<vector<int>> a(s.begin(), s.end());
+        return a;
     }
 };
 

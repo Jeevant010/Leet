@@ -4,25 +4,39 @@ using namespace std;
 class Solution {
 public:
     int numberOfSpecialChars(string word) {
-        bool lower[26] = {0};
-        bool upper[26] = {0};
+        int l = 0, u =0;
 
-        for(char ch : word) {
+        for(int i=0; i<word.size(); i++){
+            if( word[i] >= 'a' && word[i] <= 'z' ) l |= (1 << (word[i] - 'a'));
+            if( word[i] >= 'A' && word[i] <= 'Z' ) u |= (1 << (word[i] - 'A'));
 
-            if(ch >= 'a' && ch <= 'z')
-                lower[ch - 'a'] = true;
-
-            else if(ch >= 'A' && ch <= 'Z')
-                upper[ch - 'A'] = true;
         }
+        int c = l & u;
+        return __builtin_popcount(c);
 
-        int cnt = 0;
 
-        for(int i = 0; i < 26; i++) {
-            cnt += (lower[i] && upper[i]);
-        }
 
-        return cnt;
+
+
+        // bool lower[26] = {0};
+        // bool upper[26] = {0};
+
+        // for(char ch : word) {
+
+        //     if(ch >= 'a' && ch <= 'z')
+        //         lower[ch - 'a'] = true;
+
+        //     else if(ch >= 'A' && ch <= 'Z')
+        //         upper[ch - 'A'] = true;
+        // }
+
+        // int cnt = 0;
+
+        // for(int i = 0; i < 26; i++) {
+        //     cnt += (lower[i] && upper[i]);
+        // }
+
+        // return cnt;
 
 
         // vector<int> a(26), b(26);
